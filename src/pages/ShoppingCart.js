@@ -1,5 +1,5 @@
 import React from 'react';
-import ShoppingCartImg from './ShoppingCartImg';
+import ShoppingCartImg from '../components/ShoppingCartImg';
 
 class ShoppingCart extends React.Component {
   render() {
