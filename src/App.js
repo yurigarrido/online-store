@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from './pages/Main';
-import ShoppingCart from './components/ShoppingCart';
-import ShoppingCartLink from './ShoppingCartLink';
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
