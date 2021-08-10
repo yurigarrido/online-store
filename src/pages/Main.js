@@ -9,6 +9,8 @@ class Main extends Component {
   constructor() {
     super();
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.searchCategory = this.searchCategory.bind(this);
+
     this.state = {
       categories: [],
       searchTerm: '',
@@ -37,6 +39,14 @@ class Main extends Component {
     ));
   }
 
+  async searchCategory(id) {
+    await api.getProductsFromCategoryAndQuery(id, '').then((itemsCategory) => (
+      this.setState({
+        items: itemsCategory.results,
+      })
+    ));
+  }
+
   render() {
     const { categories, items } = this.state;
     return (
@@ -53,7 +63,11 @@ class Main extends Component {
         <nav>
           <h5>Categorias:</h5>
           {categories
-            .map((category) => <Categories key={ category.id } category={ category } />)}
+            .map((category) => (<Categories
+              key={ category.id }
+              category={ category }
+              searchCategory={ () => this.searchCategory(category.id) }
+            />))}
         </nav>
       </div>
     );
