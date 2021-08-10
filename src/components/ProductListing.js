@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputAndButton from './InputAndButton';
 import ProductCard from './ProductCard';
-
+//
 class ProductListing extends React.Component {
   render() {
     const { items, handleOnChange, handleOnClick } = this.props;
