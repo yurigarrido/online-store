@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    const { iten } = this.props;
-    const { thumbnail, title, price } = iten;
+    const { item } = this.props;
+    const { thumbnail, title, price } = item;
     return (
       <section data-testid="product">
         <h3>
@@ -22,13 +22,9 @@ class ProductCard extends React.Component {
 export default ProductCard;
 
 ProductCard.propTypes = {
-  iten: PropTypes.shape({
+  item: PropTypes.shape({
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
-  }),
-};
-
-ProductCard.defaultProps = {
-  iten: [],
+  }).isRequired,
 };
