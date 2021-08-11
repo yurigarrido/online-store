@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Form from '../components/Form';
 
 class ProductDetails extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class ProductDetails extends Component {
             <li>Em construção</li>
           </ul>
         </div>
+        <Form />
       </div>
     );
   }

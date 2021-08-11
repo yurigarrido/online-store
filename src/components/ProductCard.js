@@ -7,17 +7,17 @@ class ProductCard extends React.Component {
     const { item } = this.props;
     const { thumbnail, title, price, id } = item;
     return (
-      <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
-        <section data-testid="product">
-          <h3>
-            { title }
-          </h3>
+      <section data-testid="product">
+        <h3>
+          { title }
+        </h3>
+        <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
           <img src={ thumbnail } alt={ title } />
-          <p>
-            { price }
-          </p>
-        </section>
-      </Link>
+        </Link>
+        <p>
+          { price }
+        </p>
+      </section>
     );
   }
 }
