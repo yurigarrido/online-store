@@ -5,7 +5,14 @@ import ProductCard from './ProductCard';
 //
 class ProductListing extends React.Component {
   render() {
-    const { items, handleOnChange, handleOnClick } = this.props;
+    const
+      {
+        items,
+        handleOnChange,
+        saveLocalStorage,
+        handleOnClick,
+        atualizaEstadoPai,
+      } = this.props;
     if (items.length === 0) {
       return (
         <div>
@@ -26,7 +33,12 @@ class ProductListing extends React.Component {
         />
         {
           items
-            .map((item) => (<ProductCard key={ item.id } item={ item } />))
+            .map((item) => (<ProductCard
+              key={ item.id }
+              atualizaEstadoPai={ atualizaEstadoPai }
+              item={ item }
+              saveLocalStorage={ saveLocalStorage }
+            />))
         }
       </div>
     );
@@ -37,6 +49,8 @@ ProductListing.propTypes = {
   items: PropTypes.arrayOf({}).isRequired,
   handleOnChange: PropTypes.func.isRequired,
   handleOnClick: PropTypes.func.isRequired,
+  saveLocalStorage: PropTypes.func.isRequired,
+  atualizaEstadoPai: PropTypes.func.isRequired,
 };
 
 export default ProductListing;

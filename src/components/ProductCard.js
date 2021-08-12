@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ButtonAddToCard from './ButtonAddToCard';
 
 class ProductCard extends React.Component {
   render() {
-    const { item } = this.props;
+    const
+      {
+        item,
+        atualizaEstadoPai,
+        saveLocalStorage,
+      } = this.props;
     const { thumbnail, title, price, id } = item;
     return (
       <section data-testid="product">
@@ -17,6 +23,13 @@ class ProductCard extends React.Component {
         <p>
           { price }
         </p>
+        <div>
+          <ButtonAddToCard
+            atualizaEstadoPai={ atualizaEstadoPai }
+            item={ item }
+            saveLocalStorage={ saveLocalStorage }
+          />
+        </div>
       </section>
     );
   }
@@ -31,4 +44,6 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
   }).isRequired,
+  atualizaEstadoPai: PropTypes.func.isRequired,
+  saveLocalStorage: PropTypes.func.isRequired,
 };
