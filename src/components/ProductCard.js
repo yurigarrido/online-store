@@ -11,12 +11,13 @@ class ProductCard extends React.Component {
         atualizaEstadoPai,
         saveLocalStorage,
       } = this.props;
-    const { thumbnail, title, price, id } = item;
+    const { thumbnail, title, price, id, shipping } = item;
     return (
       <section data-testid="product">
         <h3>
           { title }
         </h3>
+        {shipping.free_shipping && <h5 data-testid="free-shipping">FRETE GRÁTIS</h5>}
         <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
           <img src={ thumbnail } alt={ title } />
         </Link>
@@ -43,6 +44,9 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }).isRequired,
   }).isRequired,
   atualizaEstadoPai: PropTypes.func.isRequired,
   saveLocalStorage: PropTypes.func.isRequired,
