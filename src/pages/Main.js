@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProductListing from '../components/ProductListing';
-import ShoppingCartLink from '../ShoppingCartLink';
+import ShoppingCartLink from '../components/ShoppingCartLink';
 // import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import Categories from './Categories';
@@ -15,6 +15,7 @@ class Main extends Component {
       categories: [],
       searchTerm: '',
       items: [],
+      addedToCar: [],
     };
   }
 
@@ -23,55 +24,70 @@ class Main extends Component {
       .then((resolve) => this.setState({ categories: resolve }));
   }
 
-  handleOnChange = (e) => {
-    this.setState({
-      searchTerm: e.target.value,
-    });
+  componentDidUpdate() {
+    this.saveLocalStorage();
   }
 
-  async handleOnClick(event) {
-    const { searchTerm } = this.state;
-    event.preventDefault();
-    await api.getProductsFromCategoryAndQuery('', searchTerm).then((objOfItems) => (
+    handleOnChange = (e) => {
       this.setState({
-        items: objOfItems.results,
-      })
-    ));
+        searchTerm: e.target.value,
+      });
+    }
+
+    async handleOnClick(event) {
+      const { searchTerm } = this.state;
+      event.preventDefault();
+      await api.getProductsFromCategoryAndQuery('', searchTerm).then((objOfItems) => (
+        this.setState({
+          items: objOfItems.results,
+        })
+      ));
+    }
+
+  atualizaEstadoPai = (newItemAdded) => {
+    this.setState((prvStt) => ({ addedToCar: [...prvStt.addedToCar, newItemAdded] }));
   }
 
-  async searchCategory(id) {
-    await api.getProductsFromCategoryAndQuery(id, '').then((itemsCategory) => (
-      this.setState({
-        items: itemsCategory.results,
-      })
-    ));
-  }
+   saveLocalStorage = () => {
+     const { addedToCar } = this.state;
+     localStorage.setItem('itemCarr', JSON.stringify(addedToCar));
+   }
 
-  render() {
-    const { categories, items } = this.state;
-    return (
-      <div>
-        <ShoppingCartLink />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <ProductListing
-          items={ items }
-          handleOnClick={ this.handleOnClick }
-          handleOnChange={ this.handleOnChange }
-        />
-        <nav>
-          <h5>Categorias:</h5>
-          {categories
-            .map((category) => (<Categories
-              key={ category.id }
-              category={ category }
-              searchCategory={ () => this.searchCategory(category.id) }
-            />))}
-        </nav>
-      </div>
-    );
-  }
+   async searchCategory(id) {
+     await api.getProductsFromCategoryAndQuery(id, '').then((itemsCategory) => (
+       this.setState({
+         items: itemsCategory.results,
+       })
+     ));
+   }
+
+   render() {
+     const { categories, items } = this.state;
+     return (
+       <div>
+         <ShoppingCartLink />
+         <p data-testid="home-initial-message">
+           Digite algum termo de pesquisa ou escolha uma categoria.
+         </p>
+         <ProductListing
+           items={ items }
+           handleOnClick={ this.handleOnClick }
+           handleOnChange={ this.handleOnChange }
+           atualizaEstadoPai={ this.atualizaEstadoPai }
+           saveLocalStorage={ this.saveLocalStorage }
+         />
+         <nav>
+           <h5>Categorias:</h5>
+           {categories
+             .map((category) => (<Categories
+               key={ category.id }
+               category={ category }
+               searchCategory={ () => this.searchCategory(category.id) }
+             />))}
+         </nav>
+       </div>
+     );
+   }
 }
 
 // Main.propTypes = {

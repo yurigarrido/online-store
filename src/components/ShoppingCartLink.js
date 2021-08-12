@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ShoppingCartImg from './components/ShoppingCartImg';
+import ShoppingCartImg from './ShoppingCartImg';
 
 class ShoppingCartLink extends React.Component {
   render() {
