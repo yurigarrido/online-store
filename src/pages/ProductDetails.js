@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
+import ShoppingCartLink from '../components/ShoppingCartLink';
 
 class ProductDetails extends Component {
   constructor() {
     super();
     this.state = {
       item: {},
+      items: [],
     };
   }
 
@@ -15,6 +17,8 @@ class ProductDetails extends Component {
 
     this.getItemInformation(id)
       .then((item) => this.setState({ item }));
+
+    this.loadLocalStorage();
   }
 
   async getItemInformation(id) {
@@ -24,10 +28,21 @@ class ProductDetails extends Component {
     return data;
   }
 
+  loadLocalStorage = () => {
+    const { items } = this.state;
+    const recupered = JSON.parse(localStorage.getItem('cartItems'));
+    if (recupered && recupered.length > 0) {
+      recupered.forEach((item) => {
+        items.push(item);
+      });
+    }
+  }
+
   render() {
-    const { item } = this.state;
+    const { item, items } = this.state;
     return (
       <div>
+        <ShoppingCartLink items={ items } />
         <h3 data-testid="product-detail-name">
           { item.title }
           <span>
