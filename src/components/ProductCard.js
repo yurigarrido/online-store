@@ -9,7 +9,7 @@ class ProductCard extends React.Component {
       {
         item,
         atualizaEstadoPai,
-        saveLocalStorage,
+        available,
       } = this.props;
     const { thumbnail, title, price, id, shipping } = item;
     return (
@@ -28,7 +28,7 @@ class ProductCard extends React.Component {
           <ButtonAddToCard
             atualizaEstadoPai={ atualizaEstadoPai }
             item={ item }
-            saveLocalStorage={ saveLocalStorage }
+            available={ available }
           />
         </div>
       </section>
@@ -49,5 +49,5 @@ ProductCard.propTypes = {
     }).isRequired,
   }).isRequired,
   atualizaEstadoPai: PropTypes.func.isRequired,
-  saveLocalStorage: PropTypes.func.isRequired,
+  available: PropTypes.number.isRequired,
 };

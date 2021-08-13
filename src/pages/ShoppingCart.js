@@ -1,34 +1,46 @@
 import React from 'react';
-import ListOfAddedItems from '../components/ListOfAddedItems';
-import ShoppingCartImg from '../components/ShoppingCartImg';
+import { Link } from 'react-router-dom';
+import AddedItem from '../components/AddedItem';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 
 class ShoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
-      loadLocSto: [],
+      cartItems: [],
+      showCart: false,
     };
   }
 
+  componentDidMount() {
+    this.loadLocalStorage();
+  }
+
+  componentDidUpdate() {
+    this.saveLocalStorage();
+  }
+
   loadLocalStorage = () => {
-    const { loadLocSto } = this.state;
-    const recupered = JSON.parse(localStorage.getItem('itemCarr'));
-    if (recupered !== null && recupered.length > 0) {
+    const { cartItems } = this.state;
+    const recupered = JSON.parse(localStorage.getItem('mainItems'));
+    if (recupered && recupered.length > 0) {
       recupered.forEach((item) => {
-        loadLocSto.push(item);
+        cartItems.push(item);
       });
     }
+    if (recupered) this.setState({ showCart: true });
+  }
+
+  saveLocalStorage = () => {
+    const { cartItems } = this.state;
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
   render() {
-    this.loadLocalStorage();
-    const { loadLocSto } = this.state;
-    console.log(loadLocSto.length);
-    if (loadLocSto.length === 0) {
+    const { cartItems, showCart } = this.state;
+    if (!showCart) {
       return (
         <div>
-          <ShoppingCartLink />
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
@@ -38,14 +50,17 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        <ShoppingCartImg />
-        { loadLocSto.map((anAddedItem) => (
-          <ListOfAddedItems
-            anAddedItem={ anAddedItem }
-            loadLocSto={ loadLocSto }
-            key={ anAddedItem.title }
-          />
-        ))}
+        <ShoppingCartLink />
+        { cartItems.map((anAddedItem) => (
+          <AddedItem
+            key={ anAddedItem.id }
+            item={ anAddedItem }
+          />))}
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">
+            Comprar
+          </button>
+        </Link>
       </div>
     );
   }
