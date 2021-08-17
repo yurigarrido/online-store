@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomeButton from '../components/HomeButton';
 import PaymentForm from '../components/PaymentForm';
 import ResumedItem from '../components/ResumedItem';
 
@@ -40,6 +41,7 @@ class Checkout extends Component {
     if (showPayment) {
       return (
         <div>
+          <HomeButton />
           {cartItems.map((item) => <ResumedItem key={ item.id } item={ item } />)}
           <p>{`Total da Compra: ${totalPrice}`}</p>
           <PaymentForm />
