@@ -20,7 +20,7 @@ class ShoppingCartLink extends React.Component {
 }
 
 ShoppingCartLink.propTypes = {
-  items: PropTypes.shape({}).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default ShoppingCartLink;

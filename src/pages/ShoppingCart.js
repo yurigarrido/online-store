@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddedItem from '../components/AddedItem';
 import HomeButton from '../components/HomeButton';
-// import ShoppingCartLink from '../components/ShoppingCartLink';
+import CartItem from '../components/CartItem';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -21,11 +20,19 @@ class ShoppingCart extends React.Component {
     this.saveLocalStorage();
   }
 
+  checkCartSize = () => {
+    const { cartItems } = this.state;
+    if (cartItems.length === 0 || !cartItems) {
+      this.setState({ showCart: true });
+    }
+  }
+
   loadLocalStorage = () => {
     const { cartItems } = this.state;
-    const recupered = JSON.parse(localStorage.getItem('mainItems'));
+    const recupered = JSON.parse(localStorage.getItem('uniqueItems'));
     if (recupered && recupered.length > 0) {
       recupered.forEach((item) => {
+        if (!item.quantity) item.quantity = 1;
         cartItems.push(item);
       });
     }
@@ -37,12 +44,44 @@ class ShoppingCart extends React.Component {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
+  addOne = (newItem) => {
+    const { cartItems } = this.state;
+    const { available_quantity: max } = newItem;
+    const newCart = [];
+    cartItems.forEach((item) => {
+      if (item.title === newItem.title && max > item.quantity) {
+        item.quantity += 1;
+      }
+      newCart.push(item);
+    });
+    this.setState({ cartItems: newCart });
+  }
+
+  removeOne = (itemToRemove) => {
+    const { cartItems } = this.state;
+    const newCart = [];
+    cartItems.forEach((item) => {
+      if (item.title === itemToRemove.title && item.quantity > 1) {
+        item.quantity -= 1;
+      }
+      newCart.push(item);
+    });
+    this.setState({ cartItems: newCart });
+  }
+
+  removeItem = async (itemToRemove) => {
+    const { cartItems } = this.state;
+    const newCart = cartItems.filter((item) => item.title !== itemToRemove.title);
+    await this.setState({ cartItems: newCart });
+    this.checkCartSize();
+  }
+
   render() {
     const { cartItems, showCart } = this.state;
     if (!showCart) {
       return (
         <div>
-          <HomeButton />
+          <HomeButton onClickHomeButton={ () => {} } />
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
@@ -52,12 +91,14 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        <HomeButton />
-        {/* <ShoppingCartLink /> */}
+        <HomeButton onClickHomeButton={ () => {} } />
         { cartItems.map((anAddedItem) => (
-          <AddedItem
+          <CartItem
+            addOne={ this.addOne }
+            removeOne={ this.removeOne }
             key={ anAddedItem.id }
             item={ anAddedItem }
+            removeItem={ this.removeItem }
           />))}
         <Link to="/checkout">
           <button type="button" data-testid="checkout-products">

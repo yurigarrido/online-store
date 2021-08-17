@@ -30,7 +30,7 @@ class ProductListing extends React.Component {
 }
 
 ProductListing.propTypes = {
-  items: PropTypes.arrayOf({}).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   saveLocalStorage: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   selectProduct: PropTypes.func.isRequired,

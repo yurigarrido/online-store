@@ -8,8 +8,10 @@ class ResumedItem extends Component {
       <li>
         <img src={ item.thumbnail } alt={ item.title } />
         <p>{item.title}</p>
-        <p>{`un - ${item.un}`}</p>
-        <p>{`preço - ${item.un} * ${item.price} = ${item.un * item.price}`}</p>
+        <p>{`un - ${item.quantity}`}</p>
+        <p>
+          {`preço - ${item.quantity}un * ${item.price} = ${item.quantity * item.price}`}
+        </p>
       </li>
     );
   }
@@ -19,7 +21,7 @@ ResumedItem.propTypes = {
   item: PropTypes.shape({
     thumbnail: PropTypes.string,
     title: PropTypes.string,
-    un: PropTypes.number,
+    quantity: PropTypes.number,
     price: PropTypes.number,
   }).isRequired,
 };

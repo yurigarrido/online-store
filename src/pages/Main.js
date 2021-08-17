@@ -3,7 +3,7 @@ import ProductListing from '../components/ProductListing';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 import InputAndButton from '../components/InputAndButton';
 import * as api from '../services/api';
-import Categories from './Categories';
+import Categories from '../components/Categories';
 import Details from '../components/Details';
 import HomeButton from '../components/HomeButton';
 
@@ -53,18 +53,29 @@ class Main extends Component {
     ));
   }
 
-  addToCart = (newItemAdded) => {
+  addToCart = async (newItemAdded) => {
     const { cartItems } = this.state;
     const alreadyIn = cartItems
       .some((item) => item.title === newItemAdded.title);
     if (!alreadyIn) {
-      if (newItemAdded.un) newItemAdded.un += 1;
-      else newItemAdded.un = 1;
-      this.setState((prvStt) => ({ cartItems: [...prvStt.cartItems, newItemAdded] }));
+      newItemAdded.quantity = 1;
+      await this
+        .setState((prvStt) => ({ cartItems: [...prvStt.cartItems, newItemAdded] }));
+    } else {
+      const { available_quantity: max } = newItemAdded;
+      const newCart = cartItems
+        .map((item) => {
+          if (item.title === newItemAdded.title && max > item.quantity) {
+            item.quantity += 1;
+          }
+          return item;
+        });
+      await this.setState({ cartItems: newCart });
     }
+    this.saveLocalStorage('cartItems');
   }
 
-  saveLocalStorage = (place = 'mainItems') => {
+  saveLocalStorage = (place = 'uniqueItems') => {
     const { cartItems } = this.state;
     localStorage.setItem(place, JSON.stringify(cartItems));
   }
@@ -74,6 +85,7 @@ class Main extends Component {
     const recupered = JSON.parse(localStorage.getItem('cartItems'));
     if (recupered && recupered.length > 0) {
       recupered.forEach((item) => {
+        if (!item.quantity) item.quantity = 1;
         cartItems.push(item);
       });
     }
