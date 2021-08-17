@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import AddedItem from '../components/AddedItem';
 import HomeButton from '../components/HomeButton';
 import CartItem from '../components/CartItem';
 
@@ -19,6 +18,14 @@ class ShoppingCart extends React.Component {
 
   componentDidUpdate() {
     this.saveLocalStorage();
+    this.checkCartSize();
+  }
+
+  checkCartSize = () => {
+    const { cartItems } = this.state;
+    if (cartItems.length === 0 || !cartItems) {
+      this.setState({ showCart: true });
+    }
   }
 
   loadLocalStorage = () => {
@@ -63,6 +70,12 @@ class ShoppingCart extends React.Component {
     this.setState({ cartItems: newCart });
   }
 
+  removeItem = (itemToRemove) => {
+    const { cartItems } = this.state;
+    const newCart = cartItems.filter((item) => item.title !== itemToRemove.title);
+    this.setState({ cartItems: newCart });
+  }
+
   render() {
     const { cartItems, showCart } = this.state;
     if (!showCart) {
@@ -79,17 +92,13 @@ class ShoppingCart extends React.Component {
     return (
       <div>
         <HomeButton />
-        {/* { cartItems.map((anAddedItem) => (
-          <AddedItem
-            key={ anAddedItem.id }
-            item={ anAddedItem }
-          />))} */}
         { cartItems.map((anAddedItem) => (
           <CartItem
             addOne={ this.addOne }
             removeOne={ this.removeOne }
             key={ anAddedItem.id }
             item={ anAddedItem }
+            removeItem={ this.removeItem }
           />))}
         <Link to="/checkout">
           <button type="button" data-testid="checkout-products">

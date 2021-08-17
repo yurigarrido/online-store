@@ -53,15 +53,26 @@ class Main extends Component {
     ));
   }
 
-  addToCart = (newItemAdded) => {
+  addToCart = async (newItemAdded) => {
     const { cartItems } = this.state;
     const alreadyIn = cartItems
       .some((item) => item.title === newItemAdded.title);
     if (!alreadyIn) {
-      if (newItemAdded.un) newItemAdded.un += 1;
-      else newItemAdded.un = 1;
-      this.setState((prvStt) => ({ cartItems: [...prvStt.cartItems, newItemAdded] }));
+      newItemAdded.quantity = 1;
+      await this
+        .setState((prvStt) => ({ cartItems: [...prvStt.cartItems, newItemAdded] }));
+    } else {
+      const { available_quantity: max } = newItemAdded;
+      const newCart = cartItems
+        .map((item) => {
+          if (item.title === newItemAdded.title && max > item.quantity) {
+            item.quantity += 1;
+          }
+          return item;
+        });
+      await this.setState({ cartItems: newCart });
     }
+    this.saveLocalStorage('cartItems');
   }
 
   saveLocalStorage = (place = 'uniqueItems') => {

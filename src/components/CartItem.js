@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 
 class AddedItem extends React.Component {
   render() {
-    const { item, addOne, removeOne } = this.props;
+    const { item, addOne, removeOne, removeItem } = this.props;
     return (
       <div>
         <h5 data-testid="shopping-cart-product-name">{ item.title }</h5>
+        <button
+          type="button"
+          onClick={ () => removeItem(item) }
+        >
+          X
+        </button>
         <p>
           { item.price * item.quantity }
         </p>
@@ -42,6 +48,7 @@ AddedItem.propTypes = {
   }).isRequired,
   addOne: PropTypes.func.isRequired,
   removeOne: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
 };
 
 export default AddedItem;
