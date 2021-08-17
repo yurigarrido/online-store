@@ -13,8 +13,9 @@ class ShoppingCartImg extends React.Component {
     }
     return (
       <div>
-        <img style={ { width: '50px' } } src="https://image.flaticon.com/icons/png/512/126/126510.png" alt="shopping cart icon" />
-        <span data-testid="shopping-cart-size">{size}</span>
+        <i className="fas fa-shopping-cart">
+          <span data-testid="shopping-cart-size">{size}</span>
+        </i>
       </div>
     );
   }

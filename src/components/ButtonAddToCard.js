@@ -4,12 +4,12 @@ import { string } from 'yargs';
 
 class ButtonAddToCard extends React.Component {
   render() {
-    const { atualizaEstadoPai, item, available } = this.props;
+    const { addToCart, item, available } = this.props;
     return (
       <button
         data-testid="product-add-to-cart"
         onClick={ () => {
-          atualizaEstadoPai(item, available);
+          addToCart(item, available);
         } }
         type="submit"
       >
@@ -22,7 +22,7 @@ class ButtonAddToCard extends React.Component {
 export default ButtonAddToCard;
 
 ButtonAddToCard.propTypes = {
-  atualizaEstadoPai: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
   item: PropTypes.arrayOf(string).isRequired,
   available: PropTypes.number.isRequired,
 };

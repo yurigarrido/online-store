@@ -8,7 +8,8 @@ class ProductListing extends React.Component {
       {
         items,
         saveLocalStorage,
-        atualizaEstadoPai,
+        addToCart,
+        selectProduct,
       } = this.props;
     return (
       <div>
@@ -16,10 +17,11 @@ class ProductListing extends React.Component {
           items
             .map((item) => (<ProductCard
               key={ item.id }
-              atualizaEstadoPai={ atualizaEstadoPai }
+              addToCart={ addToCart }
               item={ item }
               available={ item.available_quantity }
               saveLocalStorage={ saveLocalStorage }
+              selectProduct={ selectProduct }
             />))
         }
       </div>
@@ -30,7 +32,8 @@ class ProductListing extends React.Component {
 ProductListing.propTypes = {
   items: PropTypes.arrayOf({}).isRequired,
   saveLocalStorage: PropTypes.func.isRequired,
-  atualizaEstadoPai: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  selectProduct: PropTypes.func.isRequired,
 };
 
 export default ProductListing;

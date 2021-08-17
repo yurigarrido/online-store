@@ -8,17 +8,26 @@ class ProductCard extends React.Component {
     const
       {
         item,
-        atualizaEstadoPai,
+        addToCart,
         available,
+        selectProduct,
       } = this.props;
-    const { thumbnail, title, price, id, shipping } = item;
+    // const { thumbnail, title, price, id, shipping } = item;
+    const { thumbnail, title, price, shipping } = item;
     return (
       <section data-testid="product">
         <h3>
           { title }
         </h3>
         {shipping.free_shipping && <h5 data-testid="free-shipping">FRETE GRÁTIS</h5>}
-        <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
+        {/* <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
+          <img src={ thumbnail } alt={ title } />
+        </Link> */}
+        <Link
+          to="/"
+          data-testid="product-detail-link"
+          onClick={ () => selectProduct(item) }
+        >
           <img src={ thumbnail } alt={ title } />
         </Link>
         <p>
@@ -26,7 +35,7 @@ class ProductCard extends React.Component {
         </p>
         <div>
           <ButtonAddToCard
-            atualizaEstadoPai={ atualizaEstadoPai }
+            addToCart={ addToCart }
             item={ item }
             available={ available }
           />
@@ -48,6 +57,7 @@ ProductCard.propTypes = {
       free_shipping: PropTypes.bool,
     }).isRequired,
   }).isRequired,
-  atualizaEstadoPai: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  selectProduct: PropTypes.func.isRequired,
   available: PropTypes.number.isRequired,
 };

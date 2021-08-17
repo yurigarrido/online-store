@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AddedItem from '../components/AddedItem';
-import ShoppingCartLink from '../components/ShoppingCartLink';
+import HomeButton from '../components/HomeButton';
+// import ShoppingCartLink from '../components/ShoppingCartLink';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -41,6 +42,7 @@ class ShoppingCart extends React.Component {
     if (!showCart) {
       return (
         <div>
+          <HomeButton />
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
@@ -50,7 +52,8 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        <ShoppingCartLink />
+        <HomeButton />
+        {/* <ShoppingCartLink /> */}
         { cartItems.map((anAddedItem) => (
           <AddedItem
             key={ anAddedItem.id }

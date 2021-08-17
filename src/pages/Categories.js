@@ -5,8 +5,8 @@ class Categories extends React.Component {
   render() {
     const { searchCategory, category: { name } } = this.props;
     return (
-      <button onClick={ searchCategory } type="button">
-        <li data-testid="category">{name}</li>
+      <button data-testid="category" onClick={ searchCategory } type="button">
+        {name}
       </button>
     );
   }
