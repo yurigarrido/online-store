@@ -19,12 +19,12 @@ class Checkout extends Component {
 
   loadLocalStorage = () => {
     const { cartItems } = this.state;
-    const recupered = JSON.parse(localStorage.getItem('mainItems'));
+    const recupered = JSON.parse(localStorage.getItem('cartItems'));
     if (recupered && recupered.length > 0) {
       recupered.forEach((item, index) => {
         cartItems.push(item);
-        if (!cartItems[index].un) {
-          cartItems[index].un = 1;
+        if (!cartItems[index].quantity) {
+          cartItems[index].quantity = 1;
         }
       });
     }
@@ -35,8 +35,10 @@ class Checkout extends Component {
     const { showPayment, cartItems } = this.state;
     let totalPrice = 0;
     cartItems.forEach((item) => {
-      const { price, un } = item;
-      totalPrice += (price * un);
+      const { price } = item;
+      let { quantity } = item;
+      if (!quantity) quantity = 1;
+      totalPrice += (price * quantity);
     });
     if (showPayment) {
       return (

@@ -18,7 +18,6 @@ class ShoppingCart extends React.Component {
 
   componentDidUpdate() {
     this.saveLocalStorage();
-    this.checkCartSize();
   }
 
   checkCartSize = () => {
@@ -70,10 +69,11 @@ class ShoppingCart extends React.Component {
     this.setState({ cartItems: newCart });
   }
 
-  removeItem = (itemToRemove) => {
+  removeItem = async (itemToRemove) => {
     const { cartItems } = this.state;
     const newCart = cartItems.filter((item) => item.title !== itemToRemove.title);
-    this.setState({ cartItems: newCart });
+    await this.setState({ cartItems: newCart });
+    this.checkCartSize();
   }
 
   render() {
