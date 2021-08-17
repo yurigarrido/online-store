@@ -4,19 +4,21 @@ import ShoppingCartLink from '../components/ShoppingCartLink';
 import InputAndButton from '../components/InputAndButton';
 import * as api from '../services/api';
 import Categories from './Categories';
+import Details from '../components/Details';
+import HomeButton from '../components/HomeButton';
 
 class Main extends Component {
   constructor() {
     super();
-    this.handleOnClick = this.handleOnClick.bind(this);
-    this.searchCategory = this.searchCategory.bind(this);
 
     this.state = {
       categories: [],
       searchTerm: '',
       items: [],
-      addedToCar: [],
+      cartItems: [],
       showFailSearch: false,
+      showDetails: false,
+      selectedProduct: {},
     };
   }
 
@@ -40,7 +42,7 @@ class Main extends Component {
     });
   }
 
-  async handleOnClick(event) {
+  handleOnClick = async (event) => {
     const { searchTerm } = this.state;
     event.preventDefault();
     await api.getProductsFromCategoryAndQuery('', searchTerm).then((objOfItems) => (
@@ -51,33 +53,33 @@ class Main extends Component {
     ));
   }
 
-  atualizaEstadoPai = (newItemAdded) => {
-    const { addedToCar } = this.state;
-    const alreadyIn = addedToCar
+  addToCart = (newItemAdded) => {
+    const { cartItems } = this.state;
+    const alreadyIn = cartItems
       .some((item) => item.title === newItemAdded.title);
     if (!alreadyIn) {
       if (newItemAdded.un) newItemAdded.un += 1;
       else newItemAdded.un = 1;
-      this.setState((prvStt) => ({ addedToCar: [...prvStt.addedToCar, newItemAdded] }));
+      this.setState((prvStt) => ({ cartItems: [...prvStt.cartItems, newItemAdded] }));
     }
   }
 
   saveLocalStorage = (place = 'mainItems') => {
-    const { addedToCar } = this.state;
-    localStorage.setItem(place, JSON.stringify(addedToCar));
+    const { cartItems } = this.state;
+    localStorage.setItem(place, JSON.stringify(cartItems));
   }
 
   loadLocalStorage = () => {
-    const { addedToCar } = this.state;
+    const { cartItems } = this.state;
     const recupered = JSON.parse(localStorage.getItem('cartItems'));
     if (recupered && recupered.length > 0) {
       recupered.forEach((item) => {
-        addedToCar.push(item);
+        cartItems.push(item);
       });
     }
   }
 
-  async searchCategory(id) {
+  searchCategory = async (id) => {
     await api.getProductsFromCategoryAndQuery(id, '').then((itemsCategory) => (
       this.setState({
         items: itemsCategory.results,
@@ -85,37 +87,68 @@ class Main extends Component {
     ));
   }
 
+  selectProduct = (product) => {
+    this.setState({
+      showDetails: true,
+      selectedProduct: product,
+    });
+  }
+
+  onClickHomeButton = () => {
+    this.setState({ showDetails: false });
+  }
+
   render() {
-    const { categories, items, showFailSearch, addedToCar } = this.state;
+    const {
+      categories,
+      items,
+      showFailSearch,
+      cartItems,
+      showDetails,
+      selectedProduct,
+    } = this.state;
     const message = showFailSearch ? <p>Nenhum produto foi encontrado</p> : <> </>;
+    if (!showDetails) {
+      return (
+        <div>
+          <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+          <ShoppingCartLink
+            items={ cartItems }
+          />
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+          <InputAndButton
+            handleOnClick={ this.handleOnClick }
+            onChange={ this.handleOnChange }
+          />
+          <nav>
+            <h5>Categorias:</h5>
+            {categories
+              .map((category) => (<Categories
+                key={ category.id }
+                category={ category }
+                searchCategory={ () => this.searchCategory(category.id) }
+              />))}
+          </nav>
+          {items.length > 0 ? <ProductListing
+            selectProduct={ this.selectProduct }
+            items={ items }
+            handleOnClick={ this.handleOnClick }
+            handleOnChange={ this.handleOnChange }
+            addToCart={ this.addToCart }
+            saveLocalStorage={ this.saveLocalStorage }
+          /> : message}
+        </div>
+      );
+    }
     return (
       <div>
+        <HomeButton onClickHomeButton={ this.onClickHomeButton } />
         <ShoppingCartLink
-          items={ addedToCar }
+          items={ cartItems }
         />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <InputAndButton
-          handleOnClick={ this.handleOnClick }
-          onChange={ this.handleOnChange }
-        />
-        <nav>
-          <h5>Categorias:</h5>
-          {categories
-            .map((category) => (<Categories
-              key={ category.id }
-              category={ category }
-              searchCategory={ () => this.searchCategory(category.id) }
-            />))}
-        </nav>
-        {items.length > 0 ? <ProductListing
-          items={ items }
-          handleOnClick={ this.handleOnClick }
-          handleOnChange={ this.handleOnChange }
-          atualizaEstadoPai={ this.atualizaEstadoPai }
-          saveLocalStorage={ this.saveLocalStorage }
-        /> : message}
+        <Details selectedProduct={ selectedProduct } />
       </div>
     );
   }
