@@ -81,7 +81,7 @@ class ShoppingCart extends React.Component {
     if (!showCart) {
       return (
         <div>
-          <HomeButton />
+          <HomeButton onClickHomeButton={ () => {} } />
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
@@ -91,7 +91,7 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        <HomeButton />
+        <HomeButton onClickHomeButton={ () => {} } />
         { cartItems.map((anAddedItem) => (
           <CartItem
             addOne={ this.addOne }

@@ -34,11 +34,13 @@ Details.propTypes = {
   selectedProduct: PropTypes.shape({
     title: PropTypes.string,
     thumbnail: PropTypes.string,
-    attributes: PropTypes.arrayOf({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      value_name: PropTypes.string,
-    }),
+    attributes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        value_name: PropTypes.string,
+      }),
+    ),
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
 };

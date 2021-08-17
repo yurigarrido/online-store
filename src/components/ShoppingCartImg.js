@@ -22,7 +22,7 @@ class ShoppingCartImg extends React.Component {
 }
 
 ShoppingCartImg.propTypes = {
-  items: PropTypes.arrayOf({}).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default ShoppingCartImg;

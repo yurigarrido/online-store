@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { string } from 'yargs';
 
 class ButtonAddToCard extends React.Component {
   render() {
@@ -23,6 +22,6 @@ export default ButtonAddToCard;
 
 ButtonAddToCard.propTypes = {
   addToCart: PropTypes.func.isRequired,
-  item: PropTypes.arrayOf(string).isRequired,
+  item: PropTypes.shape().isRequired,
   available: PropTypes.number.isRequired,
 };

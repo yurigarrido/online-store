@@ -41,7 +41,7 @@ class Checkout extends Component {
     if (showPayment) {
       return (
         <div>
-          <HomeButton />
+          <HomeButton onClickHomeButton={ () => {} } />
           {cartItems.map((item) => <ResumedItem key={ item.id } item={ item } />)}
           <p>{`Total da Compra: ${totalPrice}`}</p>
           <PaymentForm />

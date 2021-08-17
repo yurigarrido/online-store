@@ -3,7 +3,7 @@ import ProductListing from '../components/ProductListing';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 import InputAndButton from '../components/InputAndButton';
 import * as api from '../services/api';
-import Categories from './Categories';
+import Categories from '../components/Categories';
 import Details from '../components/Details';
 import HomeButton from '../components/HomeButton';
 
