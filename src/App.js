@@ -5,12 +5,13 @@ import Main from './pages/Main';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
 import Checkout from './pages/Checkout';
+import HomeButton from './components/HomeButton';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Link to="/">Home</Link>
+        <HomeButton />
         <Switch>
           <Route path="/product-details/:id" component={ ProductDetails } />
           <Route path="/shopping-cart" component={ ShoppingCart } />
