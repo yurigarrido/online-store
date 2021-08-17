@@ -33,6 +33,7 @@ ProductListing.propTypes = {
   items: PropTypes.arrayOf({}).isRequired,
   saveLocalStorage: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  selectProduct: PropTypes.func.isRequired,
 };
 
 export default ProductListing;

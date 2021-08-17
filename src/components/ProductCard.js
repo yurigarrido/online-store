@@ -58,5 +58,6 @@ ProductCard.propTypes = {
     }).isRequired,
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
+  selectProduct: PropTypes.func.isRequired,
   available: PropTypes.number.isRequired,
 };

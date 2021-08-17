@@ -148,7 +148,7 @@ class Main extends Component {
         <ShoppingCartLink
           items={ cartItems }
         />
-        <Details selectedProduct={ selectedProduct } />
+        <Details selectedProduct={ selectedProduct } addToCart={ this.addToCart } />
       </div>
     );
   }

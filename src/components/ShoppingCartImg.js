@@ -13,7 +13,7 @@ class ShoppingCartImg extends React.Component {
     }
     return (
       <div>
-        <i className="fas fa-shopping-cart" data-testid="shopping-cart-size">
+        <i className="fas fa-shopping-cart">
           <span data-testid="shopping-cart-size">{size}</span>
         </i>
       </div>
