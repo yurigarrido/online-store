@@ -7,7 +7,7 @@ class ShoppingCartImg extends React.Component {
     let size = 0;
     if (items) {
       items.forEach((item) => {
-        if (item.un) size += item.un;
+        if (item.quantity) size += item.quantity;
         else size += 1;
       });
     }

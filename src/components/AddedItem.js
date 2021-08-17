@@ -37,7 +37,7 @@ class AddedItem extends React.Component {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
-  moreOneItems = () => {
+  addOne = () => {
     const { item } = this.props;
     const { available_quantity: max } = item;
     const { numberOfItems, cartItems } = this.state;
@@ -64,7 +64,7 @@ class AddedItem extends React.Component {
     this.saveLocalStorage();
   }
 
-  lessOneItems = () => {
+  removeOne = () => {
     const { item } = this.props;
     this.setState((prevous) => ({
       numberOfItems: prevous.numberOfItems === 1 ? 1 : prevous.numberOfItems - 1,
@@ -101,14 +101,14 @@ class AddedItem extends React.Component {
         <button
           data-testid="product-increase-quantity"
           type="button"
-          onClick={ this.moreOneItems }
+          onClick={ this.addOne }
         >
           +
         </button>
         <button
           data-testid="product-decrease-quantity"
           type="button"
-          onClick={ this.lessOneItems }
+          onClick={ this.removeOne }
         >
           -
         </button>

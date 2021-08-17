@@ -64,7 +64,7 @@ class Main extends Component {
     }
   }
 
-  saveLocalStorage = (place = 'mainItems') => {
+  saveLocalStorage = (place = 'uniqueItems') => {
     const { cartItems } = this.state;
     localStorage.setItem(place, JSON.stringify(cartItems));
   }
@@ -74,6 +74,7 @@ class Main extends Component {
     const recupered = JSON.parse(localStorage.getItem('cartItems'));
     if (recupered && recupered.length > 0) {
       recupered.forEach((item) => {
+        if (!item.quantity) item.quantity = 1;
         cartItems.push(item);
       });
     }
