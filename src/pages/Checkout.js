@@ -43,7 +43,10 @@ class Checkout extends Component {
     if (showPayment) {
       return (
         <div>
-          <HomeButton onClickHomeButton={ () => {} } />
+          <header className="header-container">
+            <HomeButton onClickHomeButton={ () => {} } />
+            <h1>Nome do Site</h1>
+          </header>
           {cartItems.map((item) => <ResumedItem key={ item.id } item={ item } />)}
           <p>{`Total da Compra: ${totalPrice}`}</p>
           <PaymentForm />

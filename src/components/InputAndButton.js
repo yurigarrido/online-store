@@ -8,12 +8,13 @@ class InputAndButton extends React.Component {
       <div>
         <form>
           <label htmlFor="input-header">
-            Pesquise:
+            <span>Pesquise:</span>
             <input
               onChange={ onChange }
               data-testid="query-input"
               type="text"
               id="input-header"
+              placeholder="Buscar produtos"
             />
           </label>
           <button

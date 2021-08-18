@@ -123,17 +123,22 @@ class Main extends Component {
     if (!showDetails) {
       return (
         <div>
-          <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-          <ShoppingCartLink
-            items={ cartItems }
-          />
+          <header className="header-container">
+            <h1>Nome do Site</h1>
+            <div className="header-content">
+              <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+              <InputAndButton
+                handleOnClick={ this.handleOnClick }
+                onChange={ this.handleOnChange }
+              />
+              <ShoppingCartLink
+                items={ cartItems }
+              />
+            </div>
+          </header>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <InputAndButton
-            handleOnClick={ this.handleOnClick }
-            onChange={ this.handleOnChange }
-          />
           <nav>
             <h5>Categorias:</h5>
             {categories
@@ -156,10 +161,13 @@ class Main extends Component {
     }
     return (
       <div>
-        <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-        <ShoppingCartLink
-          items={ cartItems }
-        />
+        <header className="header-container">
+          <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+          <h1>Nome do Site</h1>
+          <ShoppingCartLink
+            items={ cartItems }
+          />
+        </header>
         <Details selectedProduct={ selectedProduct } addToCart={ this.addToCart } />
       </div>
     );
