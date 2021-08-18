@@ -34,18 +34,18 @@ body {
   flex-direction: column;
   margin-top: 20px;
   margin-left: 5px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .categories-container button {
-  width: 100%;
+  width: 14vw;
   background-color: #333533;
   border: none;
   cursor: pointer;
   transition: 0.3s;
   color: #dbdbdb;
   font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   padding: 0.1em;
 }
 
