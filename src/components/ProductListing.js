@@ -12,7 +12,7 @@ class ProductListing extends React.Component {
         selectProduct,
       } = this.props;
     return (
-      <div>
+      <div className="products-container">
         {
           items
             .map((item) => (<ProductCard

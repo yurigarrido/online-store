@@ -120,6 +120,11 @@ class Main extends Component {
       selectedProduct,
     } = this.state;
     const message = showFailSearch ? <p>Nenhum produto foi encontrado</p> : <> </>;
+    const homeMessage = (
+      <p data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </p>
+    );
     if (!showDetails) {
       return (
         <div>
@@ -136,26 +141,27 @@ class Main extends Component {
               />
             </div>
           </header>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <nav>
-            <h5>Categorias:</h5>
-            {categories
-              .map((category) => (<Categories
-                key={ category.id }
-                category={ category }
-                searchCategory={ () => this.searchCategory(category.id) }
-              />))}
-          </nav>
-          {items.length > 0 ? <ProductListing
-            selectProduct={ this.selectProduct }
-            items={ items }
-            handleOnClick={ this.handleOnClick }
-            handleOnChange={ this.handleOnChange }
-            addToCart={ this.addToCart }
-            saveLocalStorage={ this.saveLocalStorage }
-          /> : message}
+          <div className="main-content">
+            <nav className="categories-container">
+              {categories
+                .map((category) => (<Categories
+                  key={ category.id }
+                  category={ category }
+                  searchCategory={ () => this.searchCategory(category.id) }
+                />))}
+            </nav>
+            <div className="products-container">
+              {items.length <= 0 && homeMessage}
+            </div>
+            {items.length > 0 ? <ProductListing
+              selectProduct={ this.selectProduct }
+              items={ items }
+              handleOnClick={ this.handleOnClick }
+              handleOnChange={ this.handleOnChange }
+              addToCart={ this.addToCart }
+              saveLocalStorage={ this.saveLocalStorage }
+            /> : message}
+          </div>
         </div>
       );
     }

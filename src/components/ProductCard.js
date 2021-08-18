@@ -12,17 +12,13 @@ class ProductCard extends React.Component {
         available,
         selectProduct,
       } = this.props;
-    // const { thumbnail, title, price, id, shipping } = item;
     const { thumbnail, title, price, shipping } = item;
     return (
-      <section data-testid="product">
+      <section className="product-card-container" data-testid="product">
         <h3>
           { title }
         </h3>
         {shipping.free_shipping && <h5 data-testid="free-shipping">FRETE GRÁTIS</h5>}
-        {/* <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
-          <img src={ thumbnail } alt={ title } />
-        </Link> */}
         <Link
           to="/"
           data-testid="product-detail-link"

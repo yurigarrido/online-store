@@ -22,7 +22,7 @@ class InputAndButton extends React.Component {
             type="submit"
             onClick={ handleOnClick }
           >
-            Pesquisar
+            <i className="fas fa-search" />
           </button>
         </form>
       </div>
