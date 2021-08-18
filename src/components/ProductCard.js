@@ -15,27 +15,28 @@ class ProductCard extends React.Component {
     const { thumbnail, title, price, shipping } = item;
     return (
       <section className="product-card-container" data-testid="product">
-        <h3>
-          { title }
-        </h3>
-        {shipping.free_shipping && <h5 data-testid="free-shipping">FRETE GRÁTIS</h5>}
+        <div className="card-header">
+          <h3 className="card-title">
+            { title }
+          </h3>
+          {shipping.free_shipping
+          && <h5 className="card-shipping" data-testid="free-shipping">FRETE GRÁTIS</h5>}
+        </div>
         <Link
           to="/"
           data-testid="product-detail-link"
           onClick={ () => selectProduct(item) }
         >
-          <img src={ thumbnail } alt={ title } />
+          <img className="card-thumbnail" src={ thumbnail } alt={ title } />
         </Link>
-        <p>
+        <p className="card-price">
           { price }
         </p>
-        <div>
-          <ButtonAddToCard
-            addToCart={ addToCart }
-            item={ item }
-            available={ available }
-          />
-        </div>
+        <ButtonAddToCard
+          addToCart={ addToCart }
+          item={ item }
+          available={ available }
+        />
       </section>
     );
   }

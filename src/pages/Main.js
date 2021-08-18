@@ -51,6 +51,9 @@ class Main extends Component {
         showFailSearch: true,
       })
     ));
+    this.setState({
+      showDetails: false,
+    });
   }
 
   addToCart = async (newItemAdded) => {
@@ -168,11 +171,17 @@ class Main extends Component {
     return (
       <div>
         <header className="header-container">
-          <HomeButton onClickHomeButton={ this.onClickHomeButton } />
           <h1>Nome do Site</h1>
-          <ShoppingCartLink
-            items={ cartItems }
-          />
+          <div className="header-content">
+            <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+            <InputAndButton
+              handleOnClick={ this.handleOnClick }
+              onChange={ this.handleOnChange }
+            />
+            <ShoppingCartLink
+              items={ cartItems }
+            />
+          </div>
         </header>
         <Details selectedProduct={ selectedProduct } addToCart={ this.addToCart } />
       </div>

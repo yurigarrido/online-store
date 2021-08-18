@@ -8,7 +8,7 @@ class InputAndButton extends React.Component {
       <div>
         <form>
           <label htmlFor="input-header">
-            <span>Pesquise:</span>
+            <span className="none">Pesquise:</span>
             <input
               onChange={ onChange }
               data-testid="query-input"
