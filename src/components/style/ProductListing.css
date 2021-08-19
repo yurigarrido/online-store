@@ -1,26 +1,27 @@
 .product-card-container {
-  flex: 0 1 24%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  height: 38vh;
-  margin: 20px 0 0 0;
-  padding: 10px 0;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex: 0 1 24%;
+  flex-direction: column;
+  height: 38vh;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px 0;
   transition: 0.3s;
 }
+
 .product-card-container:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .product-card-container img {
-  width: auto;
-  max-width: 200px;
   height: 150px;
   max-height: 150px;
+  max-width: 200px;
+  width: auto;
 }
 
 .product-card-container h3 {
@@ -28,9 +29,9 @@
 }
 
 .card-header {
+  height: 3.5vh;
   margin: 0 6px;
   text-align: center;
-  height: 3.5vh;
 }
 
 hr {
@@ -41,63 +42,63 @@ hr {
 }
 
 .card-shipping {
-  font-size: 12px;
-  color: #e7500a;
-}
-
-.card-shipping {
   animation: blink-animation 1.3s steps(6, start) infinite;
-  /* -webkit-animation: blink-animation 1s steps(3, start) infinite; */
+  color: #e7500a;
+  font-size: 12px;
 }
+
 @keyframes blink-animation {
-  from {color: #e7500a;}
-  to {color: #cecb3e;}
+
+  from {
+    color: #e7500a;
+  }
+
+  to {
+    color: #cecb3e;
+  }
 }
 
 .btn-add-cart {
-  border: none;
-
-}
-
-.btn-add-cart {
-  font-family: Hack, monospace;
   background: #333533;
-  color: #ffffff;
+  border: 0;
+  border-radius: 2px;
+  color: white;
   cursor: pointer;
+  font-family: Hack , monospace;
   font-size: 12px;
   padding: 0.5rem;
-  border: 0;
-  transition: all 0.5s;
-  border-radius: 2px;
-  width: auto;
   position: relative;
+  transition: all 0.5s;
+  width: auto;
 }
-.btn-add-cart::after {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f07a";
-  position: absolute;
-  left: 85%;
-  top: 31%;
-  right: 5%;
+
+.btn-add-cart:after {
   bottom: 0;
+  content: '\f07a';
+  font-family: 'Font Awesome 5 Free' , sans-serif;
+  font-weight: 900;
+  left: 85%;
   opacity: 0;
+  position: absolute;
+  right: 5%;
+  top: 31%;
 }
 
 .btn-add-cart:hover {
   background-color: #3148ca;
-  transition: all 0.5s;
-  box-shadow: 0px 6px 15px #0000ff61;
+  box-shadow: 0 4px 10px #0000ff61;
   padding: 0.5rem 3.5rem 0.5rem 1.5rem;
+  transition: all 0.5s;
 }
-.btn-add-cart:hover::after {
+
+.btn-add-cart:hover:after {
   opacity: 1;
   transition: all 0.5s;
 }
 
 .btn-add-cart:active {
   background-color: #7e85b4;
-  transition: all 0.5s;
-  box-shadow: 0px 6px 15px #0000ff61;
+  box-shadow: 0 6px 15px #0000ff61;
   padding: 0.5rem 3.5rem 0.5rem 1.5rem;
+  transition: all 0.5s;
 }

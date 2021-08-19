@@ -132,7 +132,7 @@ class Main extends Component {
       return (
         <div>
           <header className="header-container">
-            <h1>Nome do Site</h1>
+            <h1>Front-End Online Store</h1>
             <div className="header-content">
               <HomeButton onClickHomeButton={ this.onClickHomeButton } />
               <InputAndButton
