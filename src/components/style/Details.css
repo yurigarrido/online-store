@@ -1,0 +1,84 @@
+.details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+}
+
+.details-card {
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 5px 10px;
+}
+
+.details-card ul {
+  width: 500px;
+}
+
+.details-card li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.details-card li span {
+  list-style: none;
+}
+
+.details-card img {
+  background-color: white;
+  border-radius: 3px;
+  height: auto;
+  max-height: 300px;
+  max-width: 150px;
+  padding: 5px 10px;
+  width: 150px;
+}
+
+.evaluation {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.evaluation input, .evaluation textarea {
+  border: 0.05em solid gray;
+}
+
+.evaluation input:focus, .evaluation textarea:focus {
+  border: 0.05em solid gray;
+  outline: none;
+}
+
+.btn-comprar-details, .btn-check, .btn-eval {
+  background: #333533;
+  border: 0;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  flex-basis: 30px;
+  font-family: Poppins , sans-serif;
+  font-size: 12px;
+  height: 30px;
+  margin-top: 20px;
+  padding: 0.5rem;
+  position: relative;
+  transition: all 0.5s;
+}
+
+.btn-comprar-details:hover, .btn-check:hover {
+  background-color: #3148ca;
+  box-shadow: 0 2px 5px #0000ff61;
+  transition: all 0.5s;
+}
+
+.btn-comprar-details:active, .btn-check:active {
+  background-color: #7e85b4;
+  box-shadow: 0 3px 7px #0000ff61;
+  transition: all 0.5s;
+}

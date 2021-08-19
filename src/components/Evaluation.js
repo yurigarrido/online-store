@@ -6,7 +6,7 @@ class Evaluation extends React.Component {
       <div>
         <label htmlFor="evaluation-1">
           1
-          <input id="evaluation-1" type="radio" name="evaluation" value="1" />
+          <input required id="evaluation-1" type="radio" name="evaluation" value="1" />
         </label>
         <label htmlFor="evaluation-2">
           2

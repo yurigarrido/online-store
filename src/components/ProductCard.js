@@ -13,6 +13,7 @@ class ProductCard extends React.Component {
         selectProduct,
       } = this.props;
     const { thumbnail, title, price, shipping } = item;
+    const priceRound = (Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2);
     return (
       <section className="product-card-container" data-testid="product">
         <div className="card-header">
@@ -31,7 +32,7 @@ class ProductCard extends React.Component {
         </Link>
         <hr />
         <p className="card-price">
-          { price }
+          {`R$ ${priceRound}`}
         </p>
         <ButtonAddToCard
           addToCart={ addToCart }

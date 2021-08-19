@@ -5,8 +5,8 @@ class InputAndButton extends React.Component {
   render() {
     const { handleOnClick, onChange } = this.props;
     return (
-      <div>
-        <form>
+      <div className="search-bar">
+        <form autoComplete="off">
           <label htmlFor="input-header">
             <span className="none">Pesquise:</span>
             <input
@@ -15,9 +15,11 @@ class InputAndButton extends React.Component {
               type="text"
               id="input-header"
               placeholder="Buscar produtos"
+              autoComplete={ false }
             />
           </label>
           <button
+            className="search-button"
             data-testid="query-button"
             type="submit"
             onClick={ handleOnClick }

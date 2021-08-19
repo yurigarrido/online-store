@@ -6,6 +6,8 @@ import * as api from '../services/api';
 import Categories from '../components/Categories';
 import Details from '../components/Details';
 import HomeButton from '../components/HomeButton';
+import Title from '../components/Title';
+import Logo from '../components/Logo';
 
 class Main extends Component {
   constructor() {
@@ -124,26 +126,36 @@ class Main extends Component {
     } = this.state;
     const message = showFailSearch ? <p>Nenhum produto foi encontrado</p> : <> </>;
     const homeMessage = (
-      <p data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
+      <div className="home-message">
+        <Logo />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+      </div>
+    );
+    const header = (
+      <header>
+        <div className="header-container">
+          <div className="header-main-content">
+            <Title />
+            <InputAndButton
+              handleOnClick={ this.handleOnClick }
+              onChange={ this.handleOnChange }
+            />
+          </div>
+          <div className="header-content">
+            <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+            <ShoppingCartLink
+              items={ cartItems }
+            />
+          </div>
+        </div>
+      </header>
     );
     if (!showDetails) {
       return (
         <div>
-          <header className="header-container">
-            <h1>Front-End Online Store</h1>
-            <div className="header-content">
-              <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-              <InputAndButton
-                handleOnClick={ this.handleOnClick }
-                onChange={ this.handleOnChange }
-              />
-              <ShoppingCartLink
-                items={ cartItems }
-              />
-            </div>
-          </header>
+          { header }
           <div className="main-content">
             <nav className="categories-container">
               {categories
@@ -170,19 +182,7 @@ class Main extends Component {
     }
     return (
       <div>
-        <header className="header-container">
-          <h1>Nome do Site</h1>
-          <div className="header-content">
-            <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-            <InputAndButton
-              handleOnClick={ this.handleOnClick }
-              onChange={ this.handleOnChange }
-            />
-            <ShoppingCartLink
-              items={ cartItems }
-            />
-          </div>
-        </header>
+        { header }
         <Details selectedProduct={ selectedProduct } addToCart={ this.addToCart } />
       </div>
     );

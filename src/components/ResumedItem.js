@@ -4,15 +4,20 @@ import PropTypes from 'prop-types';
 class ResumedItem extends Component {
   render() {
     const { item } = this.props;
+    const round = (num) => (Math
+      .round((num + Number.EPSILON) * 100) / 100).toFixed(2);
     return (
-      <li>
+      <div className="resumed-item">
         <img src={ item.thumbnail } alt={ item.title } />
-        <p>{item.title}</p>
-        <p>{`un - ${item.quantity}`}</p>
-        <p>
-          {`preço - ${item.quantity}un * ${item.price} = ${item.quantity * item.price}`}
-        </p>
-      </li>
+        <div className="resumed-item-content">
+          <p>{item.title}</p>
+          <p>{`Preço R$ ${round(item.price)}`}</p>
+          <p>{`unidades - ${item.quantity}`}</p>
+          <p>
+            {`Total - R$ ${round(item.quantity * item.price)}`}
+          </p>
+        </div>
+      </div>
     );
   }
 }

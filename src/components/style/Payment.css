@@ -1,0 +1,62 @@
+.payment-info {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  width: 60vw;
+}
+
+.personal-info {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  width: 60vw;
+}
+
+.pay-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.pay-label-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.pay-label i {
+  font-size: 50px;
+}
+
+.payment-form {
+  padding-bottom: 20px;
+}
+
+.personal-info-content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+}
+
+.personal-info-content label {
+  width: 250px;
+}
+
+.payment-form input {
+  border: 0.05em solid gray;
+}
+
+.payment-form input:focus {
+  border: 0.05em solid gray;
+  outline: none;
+}

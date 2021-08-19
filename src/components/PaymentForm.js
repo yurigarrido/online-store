@@ -1,60 +1,22 @@
 import React, { Component } from 'react';
+import PaymentInfo from './PaymentInfo';
+import PersonalInfo from './PersonalInfo';
+import './style/Payment.css';
 
 class PaymentForm extends Component {
   render() {
     return (
-      <div>
-        <form>
-          <label htmlFor="full-name">
-            <input
-              type="text"
-              name="full-name"
-              placeholder="Nome completo"
-              data-testid="checkout-fullname"
-              required
-            />
-          </label>
-          <label htmlFor="email">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              data-testid="checkout-email"
-              required
-            />
-          </label>
-          <label htmlFor="cpf">
-            <input
-              type="text"
-              name="cpf"
-              placeholder="CPF"
-              data-testid="checkout-cpf"
-            />
-          </label>
-          <label htmlFor="telephone">
-            <input
-              type="text"
-              name="telephone"
-              placeholder="Telefone"
-              data-testid="checkout-phone"
-            />
-          </label>
-          <label htmlFor="cep">
-            <input
-              type="text"
-              name="cep"
-              placeholder="CEP"
-              data-testid="checkout-cep"
-            />
-          </label>
-          <label htmlFor="address">
-            <input
-              type="text"
-              name="address"
-              placeholder="Endereço"
-              data-testid="checkout-address"
-            />
-          </label>
+      <div className="payment-form">
+        <form autoComplete="off">
+          <div>
+            <PersonalInfo />
+          </div>
+          <div>
+            <PaymentInfo />
+          </div>
+          <button type="submit" className="btn-comprar">
+            Comprar
+          </button>
         </form>
       </div>
     );

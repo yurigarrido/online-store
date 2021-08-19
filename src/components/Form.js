@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import Evaluation from './Evaluation';
-// import PropTypes from 'prop-types';
 
 class Form extends Component {
   render() {
     return (
-      <form>
+      <form autoComplete="off" className="evaluation">
         <h3>Avaliações</h3>
-        <input type="text" name="email" placeholder="Email" />
+        <input
+          required
+          autoComplete={ false }
+          type="text"
+          name="email"
+          placeholder="Email"
+        />
         <Evaluation />
         <textarea
           name="description"
@@ -16,14 +21,10 @@ class Form extends Component {
           placeholder="Mensagem(opcional)"
           data-testid="product-detail-evaluation"
         />
-        <button type="submit">Avaliar</button>
+        <button className="btn-check btn-eval" type="submit">Avaliar</button>
       </form>
     );
   }
 }
-
-// Form.propTypes = {
-//
-// };
 
 export default Form;
