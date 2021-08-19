@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
 import CartItem from '../components/CartItem';
+import Title from '../components/Title';
+import InputAndButton from '../components/InputAndButton';
+import Logo from '../components/Logo';
+import '../components/style/ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -23,6 +27,8 @@ class ShoppingCart extends React.Component {
   checkCartSize = () => {
     const { cartItems } = this.state;
     if (cartItems.length === 0 || !cartItems) {
+      this.setState({ showCart: false });
+    } else {
       this.setState({ showCart: true });
     }
   }
@@ -36,7 +42,7 @@ class ShoppingCart extends React.Component {
         cartItems.push(item);
       });
     }
-    if (recupered) this.setState({ showCart: true });
+    if (recupered && recupered.length > 0) this.setState({ showCart: true });
   }
 
   saveLocalStorage = () => {
@@ -73,25 +79,46 @@ class ShoppingCart extends React.Component {
     const { cartItems } = this.state;
     const newCart = cartItems.filter((item) => item.title !== itemToRemove.title);
     await this.setState({ cartItems: newCart });
-    this.checkCartSize();
   }
 
   render() {
     const { cartItems, showCart } = this.state;
+    // this.checkCartSize();
+    const header = (
+      <header>
+        <div className="header-container">
+          <div className="header-main-content">
+            <Title />
+            <InputAndButton
+              handleOnClick={ this.handleOnClick }
+              onChange={ this.handleOnChange }
+            />
+          </div>
+          <div className="header-content">
+            <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+          </div>
+        </div>
+      </header>
+    );
     if (!showCart) {
       return (
         <div>
-          <HomeButton onClickHomeButton={ () => {} } />
-          <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
-
+          { header }
+          <div className="empty-cart">
+            <Logo />
+            <p
+              className="empty-message"
+              data-testid="shopping-cart-empty-message"
+            >
+              Seu carrinho está vazio
+            </p>
+          </div>
         </div>
       );
     }
     return (
-      <div>
-        <HomeButton onClickHomeButton={ () => {} } />
+      <div className="cart-items">
+        {header}
         { cartItems.map((anAddedItem) => (
           <CartItem
             addOne={ this.addOne }
@@ -101,7 +128,7 @@ class ShoppingCart extends React.Component {
             removeItem={ this.removeItem }
           />))}
         <Link to="/checkout">
-          <button type="button" data-testid="checkout-products">
+          <button className="btn-comprar" type="button" data-testid="checkout-products">
             Comprar
           </button>
         </Link>

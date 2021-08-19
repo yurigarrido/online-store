@@ -12,34 +12,33 @@ class ProductCard extends React.Component {
         available,
         selectProduct,
       } = this.props;
-    // const { thumbnail, title, price, id, shipping } = item;
     const { thumbnail, title, price, shipping } = item;
+    const priceRound = (Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2);
     return (
-      <section data-testid="product">
-        <h3>
-          { title }
-        </h3>
-        {shipping.free_shipping && <h5 data-testid="free-shipping">FRETE GRÁTIS</h5>}
-        {/* <Link data-testid="product-detail-link" to={ `/product-details/${id}` }>
-          <img src={ thumbnail } alt={ title } />
-        </Link> */}
+      <section className="product-card-container" data-testid="product">
+        <div className="card-header">
+          <h3 className="card-title">
+            { title }
+          </h3>
+          {shipping.free_shipping
+          && <h5 className="card-shipping" data-testid="free-shipping">FRETE GRÁTIS</h5>}
+        </div>
         <Link
           to="/"
           data-testid="product-detail-link"
           onClick={ () => selectProduct(item) }
         >
-          <img src={ thumbnail } alt={ title } />
+          <img className="card-thumbnail" src={ thumbnail } alt={ title } />
         </Link>
-        <p>
-          { price }
+        <hr />
+        <p className="card-price">
+          {`R$ ${priceRound}`}
         </p>
-        <div>
-          <ButtonAddToCard
-            addToCart={ addToCart }
-            item={ item }
-            available={ available }
-          />
-        </div>
+        <ButtonAddToCard
+          addToCart={ addToCart }
+          item={ item }
+          available={ available }
+        />
       </section>
     );
   }

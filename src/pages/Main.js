@@ -6,6 +6,8 @@ import * as api from '../services/api';
 import Categories from '../components/Categories';
 import Details from '../components/Details';
 import HomeButton from '../components/HomeButton';
+import Title from '../components/Title';
+import Logo from '../components/Logo';
 
 class Main extends Component {
   constructor() {
@@ -51,6 +53,9 @@ class Main extends Component {
         showFailSearch: true,
       })
     ));
+    this.setState({
+      showDetails: false,
+    });
   }
 
   addToCart = async (newItemAdded) => {
@@ -120,46 +125,64 @@ class Main extends Component {
       selectedProduct,
     } = this.state;
     const message = showFailSearch ? <p>Nenhum produto foi encontrado</p> : <> </>;
+    const homeMessage = (
+      <div className="home-message">
+        <Logo />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+      </div>
+    );
+    const header = (
+      <header>
+        <div className="header-container">
+          <div className="header-main-content">
+            <Title />
+            <InputAndButton
+              handleOnClick={ this.handleOnClick }
+              onChange={ this.handleOnChange }
+            />
+          </div>
+          <div className="header-content">
+            <HomeButton onClickHomeButton={ this.onClickHomeButton } />
+            <ShoppingCartLink
+              items={ cartItems }
+            />
+          </div>
+        </div>
+      </header>
+    );
     if (!showDetails) {
       return (
         <div>
-          <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-          <ShoppingCartLink
-            items={ cartItems }
-          />
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <InputAndButton
-            handleOnClick={ this.handleOnClick }
-            onChange={ this.handleOnChange }
-          />
-          <nav>
-            <h5>Categorias:</h5>
-            {categories
-              .map((category) => (<Categories
-                key={ category.id }
-                category={ category }
-                searchCategory={ () => this.searchCategory(category.id) }
-              />))}
-          </nav>
-          {items.length > 0 ? <ProductListing
-            selectProduct={ this.selectProduct }
-            items={ items }
-            handleOnClick={ this.handleOnClick }
-            handleOnChange={ this.handleOnChange }
-            addToCart={ this.addToCart }
-            saveLocalStorage={ this.saveLocalStorage }
-          /> : message}
+          { header }
+          <div className="main-content">
+            <nav className="categories-container">
+              {categories
+                .map((category) => (<Categories
+                  key={ category.id }
+                  category={ category }
+                  searchCategory={ () => this.searchCategory(category.id) }
+                />))}
+            </nav>
+            <div className="products-container">
+              {items.length <= 0 && homeMessage}
+            </div>
+            {items.length > 0 ? <ProductListing
+              selectProduct={ this.selectProduct }
+              items={ items }
+              handleOnClick={ this.handleOnClick }
+              handleOnChange={ this.handleOnChange }
+              addToCart={ this.addToCart }
+              saveLocalStorage={ this.saveLocalStorage }
+            /> : message}
+          </div>
         </div>
       );
     }
     return (
       <div>
-        <HomeButton onClickHomeButton={ this.onClickHomeButton } />
-        <ShoppingCartLink
-          items={ cartItems }
-        />
+        { header }
         <Details selectedProduct={ selectedProduct } addToCart={ this.addToCart } />
       </div>
     );

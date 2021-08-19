@@ -7,7 +7,7 @@ export default class HomeButton extends Component {
     const { onClickHomeButton } = this.props;
     return (
       <Link to="/" onClick={ onClickHomeButton }>
-        <i className="fas fa-undo-alt" />
+        <i className="fas fa-home" />
       </Link>
     );
   }

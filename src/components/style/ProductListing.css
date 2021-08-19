@@ -1,0 +1,104 @@
+.product-card-container {
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex: 0 1 24%;
+  flex-direction: column;
+  height: 38vh;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px 0;
+  transition: 0.3s;
+}
+
+.product-card-container:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.product-card-container img {
+  height: 150px;
+  max-height: 150px;
+  max-width: 200px;
+  width: auto;
+}
+
+.product-card-container h3 {
+  font-size: 13px;
+}
+
+.card-header {
+  height: 3.5vh;
+  margin: 0 6px;
+  text-align: center;
+}
+
+hr {
+  background-color: rgb(216, 216, 216);
+  border: 0;
+  height: 0.05em;
+  width: 100%;
+}
+
+.card-shipping {
+  animation: blink-animation 1.3s steps(6, start) infinite;
+  color: #e7500a;
+  font-size: 12px;
+}
+
+@keyframes blink-animation {
+
+  from {
+    color: #e7500a;
+  }
+
+  to {
+    color: #cecb3e;
+  }
+}
+
+.btn-add-cart {
+  background: #333533;
+  border: 0;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-family: Poppins , sans-serif;
+  font-size: 12px;
+  padding: 0.5rem;
+  position: relative;
+  transition: all 0.5s;
+  width: auto;
+}
+
+.btn-add-cart:after {
+  bottom: 0;
+  content: '\f07a';
+  font-family: 'Font Awesome 5 Free' , sans-serif;
+  font-weight: 900;
+  left: 85%;
+  opacity: 0;
+  position: absolute;
+  right: 5%;
+  top: 31%;
+}
+
+.btn-add-cart:hover {
+  background-color: #3148ca;
+  box-shadow: 0 4px 10px #0000ff61;
+  padding: 0.5rem 3.5rem 0.5rem 1.5rem;
+  transition: all 0.5s;
+}
+
+.btn-add-cart:hover:after {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.btn-add-cart:active {
+  background-color: #7e85b4;
+  box-shadow: 0 6px 15px #0000ff61;
+  padding: 0.5rem 3.5rem 0.5rem 1.5rem;
+  transition: all 0.5s;
+}
